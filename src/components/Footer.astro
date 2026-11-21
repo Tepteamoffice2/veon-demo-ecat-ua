@@ -1,0 +1,63 @@
+---
+import FutureLink from "./FutureLink.astro";
+import Icon from "./Icon.astro";
+import { PHONE, EMAIL, FACEBOOK, SOON } from "../data/site";
+const GROUPS = [
+  { title: "Клієнтам", items: ["Оптовим клієнтам", "Корпоративним клієнтам", "Роздрібним клієнтам", "Гарантія"] },
+  { title: "Компанія", items: ["Про нас", "Вакансії", "Кодекс етики", "Партнерські програми"] },
+  { title: "Допомога", items: ["Інструкція eCat", "Інструкція повернення", "Політика конфіденційності"] },
+];
+const year = new Date().getFullYear();
+---
+<footer class="site-footer on-ink" data-rec="U-R013,U-R002,G-R001,MA-R006,S-R006">
+  <div class="container">
+    <div class="site-footer__grid">
+      {GROUPS.map((g) => (
+        <div class="site-footer__group">
+          <p class="site-footer__title">{g.title}</p>
+          <ul class="site-footer__list">
+            {g.items.map((item) => <li><FutureLink note={SOON} class="site-footer__link">{item}</FutureLink></li>)}
+          </ul>
+        </div>
+      ))}
+      <div class="site-footer__group site-footer__group--contacts">
+        <p class="site-footer__title">Контакти</p>
+        <a class="site-footer__phone num" href={PHONE.href}>{PHONE.text}</a>
+        <a class="tel site-footer__mail" href={EMAIL.href}><Icon name="mail" size={22} />{EMAIL.text}</a>
+        <a class="tel site-footer__fb" href={FACEBOOK} rel="noopener" target="_blank">Facebook ELIT Україна<span class="visually-hidden"> (відкриється в новій вкладці)</span></a>
+      </div>
+    </div>
+    <p class="site-footer__legal">© {year} ТОВ «ЕЛІТ-Україна». Частина корпорації LKQ</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer { padding-block: var(--space-16) var(--space-8); }
+  .site-footer__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-12) var(--gutter); }
+  .site-footer__group--contacts { grid-column: 1 / -1; display: grid; justify-items: start; gap: var(--space-2); order: -1; }
+  .site-footer__title { font-family: var(--font-body); font-size: var(--fs-sm); line-height: var(--lh-sm); font-weight: 500; color: var(--color-muted-ink); margin-bottom: var(--space-4); }
+  .site-footer__list { display: grid; gap: var(--space-1); }
+  .site-footer__list :global(.site-footer__link) { min-height: var(--tap); font-size: var(--fs-sm); line-height: var(--lh-sm); }
+  .site-footer__phone {
+    font-family: var(--font-display); font-weight: 700; font-size: var(--fs-lg); line-height: var(--lh-lg);
+    font-variation-settings: "SHRP" var(--shrp);
+    color: var(--color-bg); text-decoration: none; min-height: var(--tap); display: inline-flex; align-items: center; white-space: nowrap;
+    text-underline-offset: 0.15em;
+  }
+  .site-footer__phone:hover { text-decoration-line: underline; }
+  .site-footer__phone:active { transform: translateY(1px); }
+  .site-footer__mail { font-size: var(--fs-body); }
+  .site-footer__mail :global(svg) { color: var(--color-accent); }
+  .site-footer__fb { font-size: var(--fs-sm); font-weight: 500; color: var(--color-accent); text-decoration: underline; text-decoration-thickness: 1px; }
+  .site-footer__legal {
+    margin-top: var(--space-16); padding-top: var(--space-6);
+    border-top: 1px solid var(--color-line-on-dark);
+    font-size: var(--fs-sm); line-height: var(--lh-sm); color: var(--color-muted-ink);
+  }
+
+  @media (min-width: 48rem) {
+    .site-footer { padding-top: var(--space-24); }
+    .site-footer__grid { grid-template-columns: repeat(3, minmax(0, 2fr)) minmax(0, 3fr); }
+    .site-footer__group--contacts { grid-column: auto; order: 0; }
+  }
+</style>

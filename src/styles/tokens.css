@@ -1,0 +1,147 @@
+/* Hallmark · shape: custom (query and answer: the search as the headline, the warehouse answers below) · genre: modern-minimal · theme: custom · job: sign up · idea: "Запит і відповідь складу: пошук у масштабі заголовка, нижче — відповіді складу ELIT/LKQ" · vibe: "точний інструмент, синій LKQ, цифри складу"
+ * paper: #F5F7FB · accent: #B9D3FF · display: Geologica · body: IBM Plex Sans · hero: custom, a full LKQ-blue field, H1 left on eleven columns, the search field at headline scale across twelve columns with an ice underline, one lede, Стати клієнтом plus the phone as text · nav: logo left, five anchors, phone as text, Вхід (future) with a sliding active bar; on 390 logo, phone icon, Меню full screen · footer: ink field, four groups Клієнтам, Компанія, Допомога, Контакти, phone and e-mail large · imagery: none (client logo only; the delivery route is a labelled diagram of the real system) · signature: the headline-size search typing code, OE, VIN in turn, and the blue warehouse field with 130 000+ and the drawn route Київ, філія, СТО
+ * axes: light/geometric-sans/chromatic-blue · posture: committed (LKQ blue #0047BB as the answer surface in hero, supply and start; ink #0E1A2B for tools and footer; ice #B9D3FF only on blue and ink) · contrast: pass · fold: pass · v2.0.0 */
+/* Hallmark · pre-emit critique: P4 H4 E4 S5 R4 V4 · weakest: E, a B2B catalogue home argues little emotion; the warehouse figure and the drawn route make speed the picture */
+/* Hallmark · waive 39b · search field, search button and primary buttons stand 56px on desktop (52px on phones) · concept sets the search at headline scale with 32px type, so the field and its square button need 56px; buttons match the search row */
+/* Client design tokens from design/concept.md (veon-concept: colors, fonts). One token system for the whole site. */
+
+@font-face {
+  font-family: "Geologica";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/geologica-cyrillic-shrp-normal.woff2") format("woff2-variations"), url("/fonts/geologica-cyrillic-shrp-normal.woff2") format("woff2");
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: "Geologica";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/geologica-latin-shrp-normal.woff2") format("woff2-variations"), url("/fonts/geologica-latin-shrp-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "IBM Plex Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/ibm-plex-sans-cyrillic-400-normal.woff2") format("woff2");
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: "IBM Plex Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/ibm-plex-sans-latin-400-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "IBM Plex Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/ibm-plex-sans-cyrillic-500-normal.woff2") format("woff2");
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: "IBM Plex Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/ibm-plex-sans-latin-500-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "IBM Plex Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/fonts/ibm-plex-sans-cyrillic-600-normal.woff2") format("woff2");
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: "IBM Plex Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/fonts/ibm-plex-sans-latin-600-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  /* Colour: paper is the reference book, LKQ blue is the answer, ink is the tools. */
+  --color-bg: #F5F7FB;            /* paper */
+  --color-text: #0E1A2B;          /* ink */
+  --color-brand: #0047BB;         /* LKQ blue, the answer surface */
+  --color-brand-hover: #003A99;   /* hover / pressed on paper and on blue */
+  --color-accent: #B9D3FF;        /* ice: figures, search underline, focus on blue and ink */
+  --color-accent-ink: #003A99;    /* text on an ice fill (hover of paper buttons on blue) */
+  --color-muted: #4B5870;         /* secondary text on paper */
+  --color-muted-ink: #A9B6CC;     /* secondary text on ink */
+  --color-line: rgb(14 26 43 / 0.14);      /* hairline on paper */
+  --color-line-strong: rgb(14 26 43 / 0.32);
+  --color-line-on-dark: rgb(245 247 251 / 0.24);
+
+  /* Type */
+  --font-display: "Geologica", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, sans-serif;
+  --fs-figure: clamp(4.5rem, 2.457rem + 8.38vw, 10rem);   /* 72 → 160 */
+  --fs-h1: clamp(2.125rem, 0.871rem + 5.143vw, 5.5rem);    /* 34 → 88 */
+  --fs-h2: clamp(2rem, 1.443rem + 2.286vw, 3.5rem);        /* 32 → 56 */
+  --fs-lg: clamp(1.25rem, 0.971rem + 1.143vw, 2rem);       /* 20 → 32 */
+  --fs-body: clamp(1.0625rem, 1.0254rem + 0.095vw, 1.125rem); /* 17 → 18 */
+  --fs-phone: clamp(1.5rem, 0.25rem + 7vw, 4.5rem);  /* phone in #start: the largest thing in the block */
+  --fs-sm: 0.9375rem;                                      /* 15 */
+  --lh-figure: 0.95;
+  --lh-h1: 1.04;
+  --lh-h2: 1.08;
+  --lh-lg: 1.2;
+  --lh-body: 1.55;
+  --lh-sm: 1.45;
+  --shrp: 40;
+
+  /* Spacing scale (4/8) */
+  --space-1: 0.25rem;  /* 4 */
+  --space-2: 0.5rem;   /* 8 */
+  --space-3: 0.75rem;  /* 12 */
+  --space-4: 1rem;     /* 16 */
+  --space-6: 1.5rem;   /* 24 */
+  --space-8: 2rem;     /* 32 */
+  --space-12: 3rem;    /* 48 */
+  --space-16: 4rem;    /* 64 */
+  --space-24: 6rem;    /* 96 */
+  --space-32: 8rem;    /* 128 */
+  --space-40: 10rem;   /* 160 */
+  --gutter: clamp(1rem, 0.629rem + 1.524vw, 1.5rem);        /* 16 → 24 */
+  --section-y: clamp(4rem, 2.143rem + 7.619vw, 9rem);        /* 64 → 144, paper after a colour change */
+  --section-y-lg: clamp(5rem, 2.771rem + 9.143vw, 10rem);    /* 80 → 160, the colour fields */
+  --section-y-sm: clamp(4rem, 3.257rem + 3.048vw, 6rem);     /* 64 → 96 */
+
+  /* Layout */
+  --space: clamp(1rem, 5vw, 6rem);   /* page margins, base .container */
+  --container: 1360px;
+  --header-h: 4.5rem;
+  --radius: 4px;
+  --tap: 2.75rem;      /* 44 minimum hit area */
+  --btn-h: 3.5rem;     /* 56 */
+  --btn-h-sm: 3.25rem; /* 52 */
+  --search-btn: 3.5rem;
+  --line-search: 3px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+  --dur: 600ms;
+  --dur-fast: 180ms;
+  --dur-swap: 300ms;
+  --dur-line: 700ms;
+  --dur-route: 900ms;
+}
+
+@media (max-width: 47.99rem) {
+  :root {
+    --header-h: 3.75rem;
+    --btn-h: 3.25rem;
+  }
+}

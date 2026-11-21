@@ -1,0 +1,60 @@
+---
+import Section from "../Section.astro";
+import FutureLink from "../FutureLink.astro";
+import Icon from "../Icon.astro";
+import { PHONE, SOON } from "../../data/site";
+const DIRECTIONS: { name: string; note?: string }[] = [
+  { name: "Обладнання для майстерні", note: "Каталог обладнання Bosch" },
+  { name: "Діагностика" },
+  { name: "Дизель" },
+  { name: "Навчання" },
+  { name: "Фінансування" },
+  { name: "Сервіс обладнання" },
+  { name: "Partner ELIT", note: "Мережа автосервісів" },
+];
+---
+<Section id="workshop" class="workshop">
+  <div class="container grid workshop__grid">
+    <div class="workshop__head">
+      <h2 class="h2">Для майстерні: обладнання, діагностика, навчання</h2>
+      <p class="muted workshop__lead">Окремий напрям ELIT для СТО: обладнання, каталог Bosch і сервіс після покупки. Підкажемо, з чого почати, телефоном.</p>
+      <a class="btn workshop__cta" href={PHONE.href}><Icon name="phone" class="arrow" />Консультація з обладнання</a>
+      <p class="workshop__tel small"><a class="tel" href={PHONE.href}>{PHONE.text}</a></p>
+    </div>
+    <ul class="workshop__list">
+      {DIRECTIONS.map((d) => (
+        <li>
+          <FutureLink note={SOON} class="route route--future">
+            <span class="route__name lg">{d.name}</span>
+            {d.note && <span class="route__note">{d.note}</span>}
+            <Icon name="arrow" class="arrow" />
+          </FutureLink>
+        </li>
+      ))}
+    </ul>
+  </div>
+</Section>
+
+<style>
+  :global(.workshop) { padding-block: var(--section-y); }
+  .workshop__grid { row-gap: var(--space-12); }
+  .workshop__head { grid-column: 1 / -1; display: grid; gap: var(--space-6); justify-items: start; align-content: start; }
+  .workshop__lead { max-width: 40ch; }
+  .workshop__cta { white-space: nowrap; padding-inline: var(--space-4); font-size: var(--fs-sm); }
+  @media (min-width: 48rem) { .workshop__cta { padding-inline: var(--space-6); font-size: var(--fs-body); } }
+  .workshop__tel .tel { color: var(--color-brand); min-height: var(--tap); }
+  .workshop__tel { margin-top: calc(-1 * var(--space-4)); }
+  .workshop__list { grid-column: 1 / -1; border-bottom: 1px solid var(--color-line-strong); }
+  .workshop__list :global(.route--future) { display: grid; width: 100%; text-decoration: none; }
+  .workshop__list :global(.route--future .route__name) {
+    text-decoration: underline dotted; text-decoration-thickness: 2px; text-underline-offset: 0.22em;
+    text-decoration-color: var(--color-line-strong);
+  }
+  .workshop__list :global(.route--future .arrow) { color: var(--color-muted); }
+  .workshop__list :global(.route--future .future-link__note) { left: auto; right: 0; top: auto; bottom: calc(100% - var(--space-4)); }
+
+  @media (min-width: 48rem) {
+    .workshop__head { grid-column: 1 / span 5; position: sticky; top: calc(var(--header-h) + var(--space-8)); }
+    .workshop__list { grid-column: 7 / span 6; }
+  }
+</style>

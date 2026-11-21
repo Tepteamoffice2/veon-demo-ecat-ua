@@ -1,0 +1,190 @@
+---
+import FutureLink from "./FutureLink.astro";
+import Icon from "./Icon.astro";
+import { NAV, PHONE, EMAIL, SOON } from "../data/site";
+---
+<header class="site-header" data-rec="U-R004,U-R002">
+  <div class="container site-header__in">
+    <a class="logo" href="#top" aria-label="LKQ ELIT, на початок сторінки" data-rec="P-R003,SEO-R007">
+      <picture>
+        <source srcset="/AKLogo.webp" type="image/webp" />
+        <img src="/AKLogo.png" width="250" height="32" alt="LKQ ELIT" decoding="async" />
+      </picture>
+    </a>
+
+    <nav class="nav" aria-label="Основна навігація">
+      <ul class="nav__list">
+        {NAV.map((item) => (
+          <li><a class="nav__link" href={item.href} data-nav>{item.label}</a></li>
+        ))}
+      </ul>
+      <span class="nav__bar" aria-hidden="true"></span>
+    </nav>
+
+    <div class="site-header__actions">
+      <a class="hdr-btn hdr-search" href="#hero" data-search-jump>
+        <Icon name="search" size={22} />
+        <span class="hdr-label hdr-label--search">Пошук</span>
+      </a>
+      <a class="tel hdr-btn site-header__tel" href={PHONE.href} aria-label={`Зателефонувати ${PHONE.text}`}>
+        <Icon name="phone" size={22} />
+        <span class="site-header__tel-text">{PHONE.text}</span>
+      </a>
+      <FutureLink note={SOON} class="hdr-btn site-header__login">
+        <Icon name="user" size={22} />
+        <span class="hdr-label hdr-label--login">Вхід</span>
+      </FutureLink>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" data-menu-open>
+        <Icon name="menu" size={22} />
+        <span class="hdr-label hdr-label--menu">Меню</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Меню" hidden>
+    <div class="container menu__top">
+      <span class="menu__title">Меню</span>
+      <button class="menu-btn" type="button" data-menu-close>
+        <Icon name="close" size={22} />
+        <span>Закрити</span>
+      </button>
+    </div>
+    <div class="container menu__body">
+      <ul class="menu__list">
+        {NAV.map((item) => (
+          <li><a class="menu__link" href={item.href} data-menu-link>{item.label}</a></li>
+        ))}
+      </ul>
+      <div class="menu__foot">
+        <FutureLink note={SOON} class="menu__login">Вхід в eCat</FutureLink>
+        <a class="tel menu__contact" href={PHONE.href}><Icon name="phone" size={22} />{PHONE.text}</a>
+        <a class="tel menu__contact" href={EMAIL.href}><Icon name="mail" size={22} />{EMAIL.text}</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky; top: 0; z-index: 50;
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-line);
+  }
+  .site-header__in {
+    display: flex; align-items: center; gap: var(--space-6);
+    height: var(--header-h);
+  }
+  .logo { display: inline-flex; align-items: center; min-height: var(--tap); flex: none; margin-right: auto; }
+  .logo img { width: auto; height: 1.125rem; }
+  .site-header__in { gap: var(--space-2); }
+  @media (max-width: 23.99rem) {
+    .logo img { height: 0.875rem; }
+  }
+  @media (min-width: 48rem) { .logo img { height: 1.5rem; } }
+
+  .nav { display: none; position: relative; align-self: stretch; }
+  .nav__list { display: flex; align-items: stretch; gap: var(--space-6); height: 100%; }
+  .nav__link {
+    display: inline-flex; align-items: center; height: 100%;
+    font-size: var(--fs-sm); font-weight: 500; line-height: var(--lh-sm);
+    text-decoration: none; color: var(--color-text);
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+  .nav__link:hover, .nav__link[aria-current] { color: var(--color-brand); }
+  .nav__link:active { transform: translateY(1px); }
+  .nav__bar {
+    position: absolute; left: 0; bottom: -1px;
+    width: 100px; height: 3px;
+    background: var(--color-brand);
+    transform-origin: 0 0;
+    transform: translateX(var(--bar-x, 0px)) scaleX(var(--bar-s, 0));
+    transition: transform var(--dur-swap) var(--ease-out), opacity var(--dur-fast) var(--ease-out);
+  }
+  :global(.js) .nav:not(.has-active) .nav__bar { opacity: 0; }
+
+  .site-header__actions { display: flex; align-items: center; gap: 0; flex: none; }
+  .hdr-btn, .site-header__actions :global(.hdr-btn) {
+    display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
+    min-width: var(--tap); min-height: var(--tap);
+    font-size: var(--fs-sm); font-weight: 600; color: var(--color-text); text-decoration: none;
+  }
+  .hdr-btn :global(svg), .site-header__actions :global(.hdr-btn svg) { color: var(--color-brand); flex: none; }
+  .hdr-search { transition: color var(--dur-fast) var(--ease-out); }
+  .hdr-search:hover { color: var(--color-brand); }
+  .hdr-search:active { transform: translateY(1px); }
+  .site-header__tel { font-size: var(--fs-sm); }
+  .site-header__tel-text { display: none; }
+  .site-header__actions :global(.site-header__login) { text-decoration: none; }
+  .site-header__actions :global(.site-header__login .future-link__note) { left: auto; right: 0; }
+  /* Labels: icon-only on phones, the word appears when there is room */
+  .hdr-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  .menu-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
+    min-height: var(--tap); min-width: var(--tap); padding: 0 var(--space-2);
+    border: 1px solid var(--color-line-strong); border-radius: var(--radius);
+    background: transparent; color: var(--color-text);
+    font-size: var(--fs-sm); font-weight: 600; cursor: pointer;
+    transition: background-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+  }
+  .site-header__actions .menu-btn { margin-left: var(--space-1); }
+  .menu-btn:hover { background: var(--color-line); }
+  .menu-btn:active { transform: scale(0.98); }
+  .menu-btn:disabled { color: var(--color-muted); cursor: not-allowed; }
+  @media (min-width: 30rem) {
+    .site-header__actions { gap: var(--space-1); }
+    .hdr-label--menu { position: static; width: auto; height: auto; overflow: visible; clip: auto; }
+    .site-header__actions .menu-btn { padding: 0 var(--space-3); }
+  }
+  /* Without scripts the menu cannot open: the button stays out of the way, the page itself is the navigation. */
+  :global(html:not(.js)) .site-header__actions .menu-btn { display: none; }
+
+  @media (min-width: 48rem) {
+    .site-header__actions { gap: var(--space-4); }
+    .site-header__tel-text { display: inline; }
+    .site-header__tel :global(svg) { display: none; }
+    .hdr-label--login, .hdr-label--search { position: static; width: auto; height: auto; overflow: visible; clip: auto; }
+  }
+  @media (min-width: 75rem) {
+    .site-header__in { gap: var(--space-6); }
+    .nav { display: block; }
+    .nav__list { gap: var(--space-4); }
+    .site-header__actions .menu-btn { display: none; }
+    .hdr-label--search { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  }
+  @media (min-width: 90rem) {
+    .site-header__in { gap: var(--space-8); }
+    .nav__list { gap: var(--space-6); }
+    .site-header__actions { gap: var(--space-6); }
+    .hdr-label--search { position: static; width: auto; height: auto; overflow: visible; clip: auto; }
+  }
+
+  /* Full-screen menu (phones and tablets) */
+  .menu {
+    position: fixed; inset: 0; z-index: 60;
+    background: var(--color-bg); color: var(--color-text);
+    overflow-y: auto;
+    animation: menu-in var(--dur-swap) var(--ease-out) both;
+  }
+  .menu[hidden] { display: none; }
+  .menu__top { display: flex; align-items: center; justify-content: space-between; height: var(--header-h); border-bottom: 1px solid var(--color-line); }
+  .menu__title { font-size: var(--fs-sm); font-weight: 500; color: var(--color-muted); }
+  .menu__body { padding-block: var(--space-8) var(--space-12); display: grid; gap: var(--space-12); }
+  .menu__link {
+    display: flex; align-items: center; min-height: var(--space-16);
+    border-bottom: 1px solid var(--color-line);
+    font-family: var(--font-display); font-weight: 600; font-size: 1.75rem; line-height: 1.15;
+    font-variation-settings: "SHRP" var(--shrp);
+    text-decoration: none;
+  }
+  .menu__link:hover { color: var(--color-brand); }
+  .menu__foot { display: grid; justify-items: start; gap: var(--space-2); }
+  .menu__foot :global(.menu__login) { min-height: var(--tap); font-weight: 600; margin-bottom: var(--space-4); }
+  .menu__contact { font-size: var(--fs-body); }
+  .menu__contact :global(svg) { color: var(--color-brand); }
+  @keyframes menu-in { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .menu { animation: none; }
+    .nav__bar { transition: none; }
+  }
+</style>

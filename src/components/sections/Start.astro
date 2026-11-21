@@ -1,0 +1,60 @@
+---
+import Section from "../Section.astro";
+import FutureLink from "../FutureLink.astro";
+import Icon from "../Icon.astro";
+import { PHONE, EMAIL, SOON } from "../../data/site";
+---
+<Section id="start" class="start on-blue" rec="U-R002">
+  <div class="container grid start__grid">
+    <div class="start__head">
+      <h2 class="h2">Стати клієнтом ELIT</h2>
+      <ol class="start__path">
+        <li><Icon name="phone" class="start__arrow" /><span>Зателефонуйте або напишіть</span></li>
+        <li><Icon name="arrow" class="start__arrow start__arrow--down" /><span>Отримайте доступ до eCat</span></li>
+        <li><Icon name="arrow" class="start__arrow start__arrow--down" /><span>Персональні ціни й замовлення — після реєстрації</span></li>
+      </ol>
+    </div>
+    <div class="start__contacts">
+      <p class="start__label">Центральний офіс</p>
+      <a class="start__phone num" href={PHONE.href}>{PHONE.text}</a>
+      <div class="start__row">
+        <a class="tel start__mail" href={EMAIL.href}><Icon name="mail" size={24} />{EMAIL.text}</a>
+        <FutureLink note={SOON} class="btn-outline start__reg">Реєстрація в eCat</FutureLink>
+      </div>
+      <p class="start__retail">Роздрібні покупки для себе — в інтернет-магазині eShop ELIT.</p>
+    </div>
+  </div>
+</Section>
+
+<style>
+  :global(.start) { padding-block: var(--section-y-lg); }
+  .start__grid { row-gap: var(--space-12); }
+  .start__head { grid-column: 1 / -1; display: grid; gap: var(--space-6); align-content: start; }
+  .start__path { display: grid; gap: var(--space-3); max-width: 34ch; }
+  .start__path li { display: flex; align-items: flex-start; gap: var(--space-3); font-weight: 500; }
+  .start__path :global(.start__arrow) { flex: none; width: 1.25rem; height: 1.25rem; margin-top: var(--space-1); color: var(--color-accent); }
+  .start__path :global(.start__arrow--down) { transform: rotate(90deg); }
+  .start__contacts { grid-column: 1 / -1; display: grid; justify-items: start; gap: var(--space-3); }
+  .start__label { font-size: var(--fs-sm); line-height: var(--lh-sm); font-weight: 500; color: var(--color-accent); }
+  .start__phone {
+    display: inline-block;
+    font-family: var(--font-display); font-weight: 700;
+    font-size: var(--fs-phone); line-height: 1.05; letter-spacing: -0.02em;
+    font-variation-settings: "SHRP" var(--shrp);
+    color: var(--color-bg); text-decoration: none; white-space: nowrap;
+    text-decoration-thickness: 3px; text-underline-offset: 0.12em;
+    transition: transform var(--dur-fast) var(--ease-out);
+  }
+  .start__phone:hover { text-decoration-line: underline; text-decoration-color: var(--color-accent); }
+  .start__phone:active { transform: scale(0.99); }
+  .start__mail { font-family: var(--font-display); font-size: var(--fs-lg); font-weight: 600; color: var(--color-bg); }
+  .start__mail :global(svg) { color: var(--color-accent); }
+  .start__row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-4) var(--space-8); margin-top: var(--space-2); }
+  .start__row :global(.start__reg) { text-decoration: none; }
+  .start__retail { margin-top: var(--space-4); font-size: var(--fs-sm); line-height: var(--lh-sm); color: var(--color-accent); }
+
+  @media (min-width: 48rem) {
+    .start__head { grid-column: 1 / span 5; }
+    .start__contacts { grid-column: 6 / span 7; justify-self: end; }
+  }
+</style>

@@ -1,0 +1,169 @@
+---
+import Section from "../Section.astro";
+import Icon from "../Icon.astro";
+---
+<Section id="supply" class="supply on-blue" rec="G-R003">
+  <div class="container">
+    <h2 class="h2 supply__title">Склад і доставка</h2>
+    <div class="grid supply__grid">
+      <div class="supply__main">
+        <p class="supply__figure num">130&nbsp;000+</p>
+        <p class="supply__caption">позицій на центральному складі в Києві</p>
+        <p class="supply__brands"><span class="num">250</span> брендів</p>
+      </div>
+      <div class="supply__side">
+        <p class="supply__side-num num">200&nbsp;000+</p>
+        <p class="supply__side-text">позицій ще на складі LKQ CEE у Празі</p>
+      </div>
+    </div>
+
+    <figure class="route-map" data-reveal aria-labelledby="route-cap">
+      <ol class="route-map__line">
+        <li class="route-map__stop" style="--i:0">
+          <span class="route-map__dot" aria-hidden="true"></span>
+          <span class="route-map__name">Склад у Києві</span>
+        </li>
+        <li class="route-map__seg" style="--i:1" aria-hidden="true"></li>
+        <li class="route-map__stop" style="--i:2">
+          <span class="route-map__dot" aria-hidden="true"></span>
+          <span class="route-map__name">Найближча філія</span>
+        </li>
+        <li class="route-map__seg route-map__seg--time" style="--i:3">
+          <span class="route-map__time num">1,5–2 год</span>
+        </li>
+        <li class="route-map__stop route-map__stop--end" style="--i:4">
+          <span class="route-map__dot" aria-hidden="true"></span>
+          <span class="route-map__name">Ваше СТО</span>
+        </li>
+      </ol>
+      <figcaption class="route-map__cap" id="route-cap">Схема доставки: від найближчої філії до СТО за 1,5–2 год. Дані: корпоративний сайт ELIT-Україна.</figcaption>
+    </figure>
+
+    <div class="supply__foot">
+      <ul class="supply__facts">
+        <li><span class="num">30+</span> років на ринку України</li>
+        <li><span class="num">850+</span> співробітників</li>
+        <li>Частина корпорації LKQ</li>
+      </ul>
+      <a class="btn" href="#start">Як стати клієнтом <Icon name="arrow" class="arrow" /></a>
+    </div>
+  </div>
+</Section>
+
+<style>
+  :global(.supply) { padding-block: var(--section-y-lg); }
+  .supply__title { margin-bottom: var(--space-12); }
+  .supply__grid { row-gap: var(--space-8); }
+  .supply__main, .supply__side { grid-column: 1 / -1; }
+  .supply__figure {
+    font-family: var(--font-display); font-weight: 800;
+    font-size: var(--fs-figure); line-height: var(--lh-figure);
+    font-variation-settings: "SHRP" var(--shrp);
+    letter-spacing: -0.03em; white-space: nowrap;
+    color: var(--color-accent);
+  }
+  .supply__caption {
+    margin-top: var(--space-4); max-width: 20ch;
+    font-family: var(--font-display); font-weight: 600; font-size: var(--fs-lg); line-height: var(--lh-lg);
+    font-variation-settings: "SHRP" var(--shrp);
+  }
+  .supply__brands {
+    margin-top: var(--space-6);
+    font-family: var(--font-display); font-weight: 700; font-size: var(--fs-h2); line-height: var(--lh-h2);
+    font-variation-settings: "SHRP" var(--shrp);
+  }
+  .supply__brands .num { color: var(--color-accent); }
+  .supply__side { padding-top: var(--space-6); border-top: 1px solid var(--color-line-on-dark); }
+  .supply__side-num {
+    font-family: var(--font-display); font-weight: 700; font-size: var(--fs-h2); line-height: var(--lh-h2);
+    font-variation-settings: "SHRP" var(--shrp); color: var(--color-accent); white-space: nowrap;
+  }
+  .supply__side-text {
+    margin-top: var(--space-3); max-width: 20ch;
+    font-family: var(--font-display); font-weight: 600; font-size: var(--fs-lg); line-height: var(--lh-lg);
+    font-variation-settings: "SHRP" var(--shrp);
+  }
+
+  /* Route diagram: vertical on phones, horizontal from tablets */
+  .route-map { margin: var(--space-16) 0 0; }
+  .route-map__line { display: grid; grid-template-columns: var(--space-6) minmax(0, 1fr); align-items: center; }
+  .route-map__stop { display: contents; }
+  .route-map__dot {
+    grid-column: 1; justify-self: center;
+    width: 1rem; height: 1rem; border-radius: 50%;
+    background: var(--color-bg);
+  }
+  .route-map__stop--end .route-map__dot { background: var(--color-accent); width: 1.5rem; height: 1.5rem; }
+  .route-map__name {
+    grid-column: 2; padding-left: var(--space-4);
+    font-family: var(--font-display); font-weight: 600; font-size: var(--fs-lg); line-height: var(--lh-lg);
+    font-variation-settings: "SHRP" var(--shrp);
+  }
+  .route-map__seg {
+    grid-column: 1 / -1;
+    display: grid; grid-template-columns: var(--space-6) minmax(0, 1fr); align-items: center;
+    min-height: var(--space-16);
+  }
+  .route-map__seg::before {
+    content: ""; grid-column: 1; grid-row: 1; justify-self: center; align-self: stretch;
+    width: 2px;
+    background: var(--color-line-on-dark);
+    transform-origin: 50% 0;
+  }
+  .route-map__seg--time { min-height: var(--space-24); }
+  .route-map__seg--time::before { width: 4px; background: var(--color-accent); }
+  .route-map__time {
+    grid-column: 2; grid-row: 1; padding-left: var(--space-4);
+    font-family: var(--font-display); font-weight: 700; font-size: var(--fs-h2); line-height: var(--lh-h2);
+    font-variation-settings: "SHRP" var(--shrp);
+    color: var(--color-accent); white-space: nowrap;
+  }
+  .route-map__cap { margin-top: var(--space-6); font-size: var(--fs-sm); line-height: var(--lh-sm); color: var(--color-accent); }
+
+  .supply__foot {
+    margin-top: var(--space-16); padding-top: var(--space-8);
+    border-top: 1px solid var(--color-line-on-dark);
+    display: grid; gap: var(--space-8); justify-items: start;
+  }
+  .supply__facts { display: flex; flex-wrap: wrap; gap: var(--space-3) var(--space-8); font-weight: 600; }
+  .supply__facts .num { color: var(--color-accent); }
+
+  @media (min-width: 48rem) {
+    .supply__main { grid-column: 1 / span 7; }
+    .supply__side { grid-column: 9 / span 4; align-self: start; padding-top: 0; border-top: 0; border-left: 1px solid var(--color-line-on-dark); padding-left: var(--gutter); }
+    .supply__side-num { font-size: var(--fs-h2); margin-top: var(--space-4); }
+    /* Five tracks: dot, segment, dot, segment, dot. Segments run from dot to dot; names sit under their dots. */
+    .route-map__line {
+      grid-template-columns: 1.5rem minmax(0, 1fr) 1.5rem minmax(0, 1fr) 1.5rem;
+      grid-template-rows: auto 1.5rem auto;
+    }
+    .route-map__dot { grid-row: 2; justify-self: center; position: relative; z-index: 1; }
+    .route-map__stop:nth-child(1) .route-map__dot { grid-column: 1; }
+    .route-map__stop:nth-child(3) .route-map__dot { grid-column: 3; }
+    .route-map__stop:nth-child(5) .route-map__dot { grid-column: 5; }
+    .route-map__name { grid-row: 3; padding: var(--space-4) 0 0; white-space: nowrap; }
+    .route-map__stop:nth-child(1) .route-map__name { grid-column: 1 / 3; justify-self: start; }
+    .route-map__stop:nth-child(3) .route-map__name { grid-column: 2 / 5; justify-self: center; text-align: center; }
+    .route-map__stop:nth-child(5) .route-map__name { grid-column: 4 / 6; justify-self: end; text-align: right; }
+    .route-map__seg {
+      grid-row: 1 / span 2; min-height: 0;
+      grid-template-columns: minmax(0, 1fr); grid-template-rows: subgrid;
+    }
+    .route-map__seg:nth-child(2) { grid-column: 1 / 4; }
+    .route-map__seg:nth-child(4) { grid-column: 3 / 6; }
+    .route-map__seg::before {
+      grid-row: 2; grid-column: 1; align-self: center; justify-self: stretch;
+      width: auto; height: 2px; margin-inline: var(--space-3);
+      transform-origin: 0 50%;
+    }
+    .route-map__seg--time::before { height: 4px; }
+    .route-map__time { grid-row: 1; grid-column: 1; padding: 0 0 var(--space-4); justify-self: center; text-align: center; }
+    .supply__foot { grid-template-columns: minmax(0, 1fr) auto; align-items: center; }
+  }
+
+  /* Effect 3: the route is drawn when it enters the screen (scripts on, motion allowed); speed comes last. */
+  .route-map__seg::before { transition: transform var(--dur-swap) var(--ease-out); transition-delay: calc(var(--i) * 150ms); }
+  .route-map__dot { transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-out); transition-delay: calc(var(--i) * 150ms); }
+  .route-map__time { transition: opacity 250ms var(--ease-out), transform 250ms var(--ease-out); transition-delay: 700ms; }
+  /* Hidden start states live in global.css (.js scope). */
+</style>

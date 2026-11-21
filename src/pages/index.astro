@@ -1,0 +1,46 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Hero from "../components/sections/Hero.astro";
+import Audience from "../components/sections/Audience.astro";
+import Catalog from "../components/sections/Catalog.astro";
+import Supply from "../components/sections/Supply.astro";
+import Workshop from "../components/sections/Workshop.astro";
+import Tools from "../components/sections/Tools.astro";
+import Branches from "../components/sections/Branches.astro";
+import Start from "../components/sections/Start.astro";
+import { PHONE, EMAIL, FACEBOOK } from "../data/site";
+
+const title = "ELIT eCat — каталог автозапчастин для СТО та магазинів";
+const description = "Каталог ELIT (корпорація LKQ): понад 130 000 позицій від 250 брендів у Києві, доставка на СТО за 1,5–2 год. Пошук за кодом, OE, VIN. Тел. +380 44 389-44-33";
+const org = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "ELIT eCat",
+  legalName: "ТОВ «ЕЛІТ-Україна»",
+  telephone: PHONE.href.replace("tel:", ""),
+  email: EMAIL.text,
+  parentOrganization: { "@type": "Organization", name: "LKQ Corporation" },
+  sameAs: [FACEBOOK],
+};
+---
+<Base lang="uk" title={title} description={description} rec="SEO-R002">
+  <Fragment slot="head">
+    <link rel="preload" href="/fonts/geologica-cyrillic-shrp-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <meta name="theme-color" content="#0047BB" />
+    <script type="application/ld+json" is:inline data-rec="SEO-R003" set:html={JSON.stringify(org)} />
+  </Fragment>
+  <Header slot="header" />
+  <Hero />
+  <Audience />
+  <Catalog />
+  <Supply />
+  <Workshop />
+  <Tools />
+  <Branches />
+  <Start />
+  <Footer slot="footer" />
+</Base>
+<script src="../scripts/header.ts"></script>
+<script src="../scripts/search.ts"></script>

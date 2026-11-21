@@ -1,0 +1,55 @@
+---
+import Section from "../Section.astro";
+import SearchBar from "../SearchBar.astro";
+import Icon from "../Icon.astro";
+import { PHONE } from "../../data/site";
+---
+<Section id="hero" class="hero on-blue" rec="U-R001,U-R009,SEO-R001,U-R007">
+  <div class="container hero__in">
+    <h1 class="hero__title">ELIT eCat — каталог автозапчастин і обладнання для СТО та магазинів</h1>
+    <div class="hero__search"><SearchBar /></div>
+    <div class="hero__actions" data-rec="U-R002,G-R001,MA-R006">
+      <a class="btn hero__cta" href="#start">Стати клієнтом <Icon name="arrow" class="arrow" /></a>
+      <a class="tel hero__tel" href={PHONE.href}><Icon name="phone" size={22} />{PHONE.text}</a>
+    </div>
+    <p class="hero__lead">Частина корпорації LKQ. Понад <span class="num">130&nbsp;000</span> позицій від 250 брендів на складі в Києві, доставка на СТО за <span class="num">1,5–2</span>&nbsp;год від найближчої філії.</p>
+  </div>
+</Section>
+
+<style>
+  .hero__in {
+    display: flex; flex-direction: column; justify-content: center;
+    gap: var(--space-6);
+    padding-block: var(--space-8) var(--space-12);
+  }
+  .hero__title {
+    font-family: var(--font-display);
+    font-size: var(--fs-h1); line-height: var(--lh-h1);
+    font-weight: 750; letter-spacing: -0.02em;
+    font-variation-settings: "SHRP" var(--shrp);
+    max-width: 22ch;
+  }
+  .hero__actions { display: grid; gap: var(--space-2); }
+  .hero__cta { width: 100%; }
+  .hero__tel { justify-content: center; font-size: var(--fs-body); color: var(--color-bg); }
+  .hero__tel :global(svg) { color: var(--color-accent); }
+  .hero__lead { max-width: 52ch; color: var(--color-bg); }
+
+  @media (min-width: 48rem) {
+    .hero__in {
+      min-height: min(calc(100svh - var(--header-h)), 60rem);
+      gap: var(--space-8);
+      padding-block: var(--space-16);
+    }
+    .hero__title { max-width: 16ch; }
+    .hero__search { order: 2; }
+    .hero__lead { order: 3; font-size: var(--fs-body); }
+    .hero__actions { order: 4; display: flex; align-items: center; gap: var(--space-8); }
+    .hero__cta { width: auto; }
+    .hero__tel { font-size: var(--fs-lg); font-family: var(--font-display); font-weight: 600; min-height: var(--btn-h); }
+  }
+  @media (min-width: 75rem) {
+    .hero__title { max-width: 24ch; }
+    .hero__in { gap: var(--space-12); }
+  }
+</style>

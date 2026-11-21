@@ -1,0 +1,124 @@
+---
+// The eCat search at headline scale. Typing works; sending is a future feature: the button explains it, no fake results.
+import Icon from "./Icon.astro";
+import { PHONE } from "../data/site";
+const FORMATS = ["Код товару", "OE код", "VIN код", "Назва товару", "Марка авто"];
+---
+<div class="search" role="search" aria-label="Пошук у каталозі" data-rec="U-R001,U-R006" data-search>
+  <label class="visually-hidden" for="q">Пошук у каталозі ELIT eCat</label>
+  <div class="search__row">
+    <div class="search__field">
+      <input
+        class="search__input"
+        id="q"
+        type="search"
+        name="q"
+        placeholder=" "
+        autocomplete="off"
+        spellcheck="false"
+        enterkeyhint="search"
+        aria-describedby="q-hint q-note"
+        data-search-input
+      />
+      <span class="search__ghost" aria-hidden="true">
+        <span class="search__ghost-text" data-ghost data-formats={FORMATS.join("|")}>Код, OE або VIN</span>
+      </span>
+      <span class="search__line" aria-hidden="true"></span>
+    </div>
+    <button class="search__btn" type="button" aria-disabled="true" aria-describedby="q-note" data-search-submit>
+      <Icon name="arrow" size={28} />
+      <span class="visually-hidden">Знайти</span>
+    </button>
+    <span class="search__tip" aria-hidden="true">Пошук запрацює в повній версії сайту</span>
+  </div>
+  <p class="search__hint" id="q-hint">Код товару, OE, VIN, назва або марка авто</p>
+  <p class="search__note" id="q-note" role="status" data-search-note>
+    Пошук запрацює в повній версії сайту. Зараз підкажемо телефоном: <a class="tel" href={PHONE.href}>{PHONE.text}</a>
+  </p>
+</div>
+
+<style>
+  .search { width: 100%; }
+  .search__row { position: relative; display: flex; align-items: flex-end; gap: var(--space-4); }
+  .search__field { position: relative; flex: 1 1 auto; min-width: 0; }
+  .search__input {
+    display: block; width: 100%;
+    height: var(--search-btn);
+    padding: 0; margin: 0;
+    border: 0; border-bottom: var(--line-search) solid var(--color-muted-ink); border-radius: 0;
+    background: transparent; color: var(--color-bg);
+    font-family: var(--font-display); font-weight: 600; font-size: var(--fs-lg); line-height: var(--lh-lg);
+    font-variation-settings: "SHRP" var(--shrp);
+    -webkit-appearance: none; appearance: none;
+  }
+  .search__input::-webkit-search-cancel-button { -webkit-appearance: none; }
+  .search__input::placeholder { color: transparent; }
+  .search__input:focus { outline: none; }
+  .search__field:focus-within { outline: 3px solid var(--color-accent); outline-offset: var(--space-1); border-radius: var(--radius); }
+
+  .search__ghost {
+    position: absolute; inset: 0 0 0 0;
+    display: flex; align-items: center;
+    pointer-events: none; overflow: hidden;
+    font-family: var(--font-display); font-weight: 600; font-size: var(--fs-lg); line-height: var(--lh-lg);
+    font-variation-settings: "SHRP" var(--shrp);
+    color: var(--color-accent);
+  }
+  .search__ghost-text { display: block; white-space: nowrap; transition: opacity var(--dur-swap) var(--ease-out), transform var(--dur-swap) var(--ease-out); }
+  .search__ghost-text.is-out { opacity: 0; transform: translateY(-8px); }
+  .search__ghost-text.is-in { opacity: 0; transform: translateY(8px); transition: none; }
+  .search__input:not(:placeholder-shown) + .search__ghost { opacity: 0; }
+
+  .search__line {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    height: var(--line-search);
+    background: var(--color-accent);
+    transform-origin: 0 50%;
+    animation: line-draw var(--dur-line) var(--ease-out) 120ms both;
+  }
+  @keyframes line-draw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+  .search__btn {
+    position: relative; flex: none;
+    display: inline-flex; align-items: center; justify-content: center;
+    width: var(--search-btn); height: var(--search-btn);
+    border: 0; border-radius: var(--radius);
+    background: var(--color-bg); color: var(--color-brand);
+    cursor: help;
+    transition: background-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+  }
+  .search__btn:hover { background: var(--color-accent); }
+  .search__btn:active { transform: scale(0.98); }
+  .search__btn:disabled { background: var(--color-muted-ink); cursor: not-allowed; }
+  .search__btn :global(svg) { transition: transform var(--dur-fast) var(--ease-out); }
+  .search__btn:hover :global(svg) { transform: translateX(4px); }
+  .search__tip[aria-hidden="true"] {
+    position: absolute; right: 0; top: calc(100% + var(--space-2));
+    white-space: nowrap; padding: var(--space-1) var(--space-2);
+    font-size: 0.8125rem; font-weight: 500; line-height: 1.3;
+    background: var(--color-text); color: var(--color-bg); border-radius: var(--radius);
+    opacity: 0; visibility: hidden; transform: translateY(-4px); pointer-events: none; z-index: 5;
+    transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-out), visibility 200ms;
+  }
+  .search__btn:hover + .search__tip, .search__btn:focus-visible + .search__tip { opacity: 1; visibility: visible; transform: none; }
+
+  .search__hint { margin-top: var(--space-3); font-size: var(--fs-sm); line-height: var(--lh-sm); font-weight: 500; color: var(--color-accent); }
+  .search__note {
+    margin-top: var(--space-2);
+    font-size: var(--fs-sm); line-height: var(--lh-sm);
+    color: var(--color-bg);
+  }
+  .search__note .tel { min-height: 0; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+  /* With scripts the note waits for the first attempt to search; without scripts it is simply shown. */
+  :global(.js) .search__note:not(.is-shown) { display: none; }
+  .search__note.is-shown { animation: note-in var(--dur-swap) var(--ease-out) both; }
+  @keyframes note-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+
+  @media (min-width: 48rem) {
+    .search__row { gap: var(--space-6); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .search__line { animation: none; }
+    .search__btn:hover :global(svg) { transform: none; }
+  }
+</style>

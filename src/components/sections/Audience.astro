@@ -1,0 +1,70 @@
+---
+import Section from "../Section.astro";
+import Icon from "../Icon.astro";
+import { PHONE } from "../../data/site";
+---
+<Section id="audience" class="audience" rec="U-R007">
+  <div class="container">
+    <h2 class="h2 audience__title">Для кого працює eCat</h2>
+    <div class="grid audience__grid">
+      <a class="route route--main" href="#workshop">
+        <span class="route__name audience__main-name">СТО і майстерні</span>
+        <span class="route__note">Запчастини, обладнання й каталог Bosch, діагностика, навчання.</span>
+        <Icon name="arrow" class="arrow" />
+        <span class="audience__fact"><span class="audience__fact-num num">1,5–2 год</span> доставка на СТО від найближчої філії</span>
+      </a>
+      <div class="audience__side">
+        <a class="route" href="#catalog">
+          <span class="route__name lg">Магазини автозапчастин (опт)</span>
+          <span class="route__note">11 розділів каталогу, понад 130 000 позицій на складі в Києві.</span>
+          <Icon name="arrow" class="arrow" />
+        </a>
+        <a class="route" href="#start">
+          <span class="route__name lg">Корпоративні клієнти</span>
+          <span class="route__note">Зв’яжіться з центральним офісом, щоб обговорити співпрацю.</span>
+          <Icon name="arrow" class="arrow" />
+        </a>
+      </div>
+    </div>
+    <p class="audience__retail" data-rec="U-R010">
+      <span class="audience__retail-q">Купуєте для себе?</span>
+      Роздрібні покупки — в інтернет-магазині eShop ELIT. Підкажемо телефоном: <a class="tel" href={PHONE.href}>{PHONE.text}</a>
+    </p>
+  </div>
+</Section>
+
+<style>
+  :global(.audience) { padding-block: var(--section-y-sm) var(--space-16); }
+  .audience__title { margin-bottom: var(--space-8); }
+  .audience__grid { row-gap: 0; }
+  .route--main { grid-column: 1 / -1; align-content: start; }
+  .audience__main-name {
+    font-family: var(--font-display); font-weight: 700;
+    font-size: var(--fs-h2); line-height: var(--lh-h2);
+    font-variation-settings: "SHRP" var(--shrp);
+    letter-spacing: -0.015em;
+  }
+  .route--main .route__note { max-width: 40ch; font-size: var(--fs-body); }
+  .audience__fact { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-1) var(--space-4); margin-top: var(--space-6); color: var(--color-muted); }
+  .audience__fact-num { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-lg); line-height: var(--lh-lg); color: var(--color-brand); white-space: nowrap; }
+  .route--main :global(.arrow) { width: 2.5rem; height: 2.5rem; }
+  .audience__side { grid-column: 1 / -1; }
+  .audience__side .route:last-child, .route--main { border-bottom: 0; }
+  .audience__retail {
+    margin-top: var(--space-8);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--color-line-strong);
+    color: var(--color-muted);
+  }
+  .audience__retail-q { color: var(--color-text); font-weight: 600; }
+  .audience__retail .tel { min-height: 0; color: var(--color-brand); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+
+  @media (min-width: 48rem) {
+    .route--main { grid-column: 1 / span 7; padding-block: var(--space-8); align-self: stretch; grid-template-rows: auto auto 1fr; }
+    .route--main :global(.arrow) { grid-row: 1; align-self: start; }
+    .route--main .route__note { grid-column: 1; margin-top: var(--space-3); }
+    .audience__fact { align-self: end; }
+    .audience__side { grid-column: 8 / span 5; border-left: 1px solid var(--color-line); padding-left: var(--gutter); border-top: 1px solid var(--color-line-strong); }
+    .audience__side .route:first-child { border-top: 0; }
+  }
+</style>

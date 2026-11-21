@@ -1,0 +1,51 @@
+---
+import Section from "../Section.astro";
+import FutureLink from "../FutureLink.astro";
+import Icon from "../Icon.astro";
+import { SOON } from "../../data/site";
+const STEPS = [
+  "Знайти за кодом, OE чи VIN",
+  "Імпортувати кошик з файлу",
+  "Оформити замовлення",
+  "Підключити ЕДО",
+  "Оформити повернення",
+  "Аукціон і флеш-розпродаж",
+];
+---
+<Section id="tools" class="tools on-ink">
+  <div class="container grid tools__grid">
+    <div class="tools__head">
+      <h2 class="h2">Онлайн-сервіси для клієнтів</h2>
+      <p class="muted tools__lead">Так працює клієнт в eCat після входу: від пошуку деталі до повернення товару.</p>
+    </div>
+    <ol class="flow">
+      {STEPS.map((step) => (
+        <li class="flow__item">
+          <Icon name="arrow" class="flow__arrow" />
+          <FutureLink note={SOON} class="flow__link">{step}</FutureLink>
+        </li>
+      ))}
+    </ol>
+  </div>
+</Section>
+
+<style>
+  :global(.tools) { padding-block: var(--section-y-sm); }
+  .tools__grid { row-gap: var(--space-12); }
+  .tools__head { grid-column: 1 / -1; display: grid; gap: var(--space-4); align-content: start; }
+  .tools__lead { max-width: 36ch; }
+  .flow { grid-column: 1 / -1; display: grid; gap: var(--space-3); }
+  .flow__item { display: flex; align-items: flex-start; gap: var(--space-3); }
+  .flow :global(.flow__link) {
+    font-family: var(--font-display); font-weight: 600;
+    font-size: var(--fs-lg); line-height: var(--lh-lg);
+    font-variation-settings: "SHRP" var(--shrp);
+  }
+  .flow :global(.flow__link:hover) { color: var(--color-accent); }
+  .flow :global(.flow__arrow) { flex: none; width: 1.5rem; height: 1.5rem; margin-top: var(--space-1); color: var(--color-accent); }
+
+  @media (min-width: 48rem) {
+    .tools__head { grid-column: 1 / span 4; }
+    .flow { grid-column: 5 / span 8; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(3, auto); grid-auto-flow: column; gap: var(--space-6) var(--gutter); }
+  }
+</style>
