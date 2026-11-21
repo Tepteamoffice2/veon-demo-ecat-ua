@@ -1,5 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
+import geoCyr from "../assets/fonts/geologica-cyrillic-shrp-normal.woff2?url";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import Hero from "../components/sections/Hero.astro";
@@ -27,7 +28,7 @@ const org = {
 ---
 <Base lang="uk" title={title} description={description} rec="SEO-R002">
   <Fragment slot="head">
-    <link rel="preload" href="/fonts/geologica-cyrillic-shrp-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={geoCyr} as="font" type="font/woff2" crossorigin />
     <meta name="theme-color" content="#0047BB" />
     <script type="application/ld+json" is:inline data-rec="SEO-R003" set:html={JSON.stringify(org)} />
   </Fragment>

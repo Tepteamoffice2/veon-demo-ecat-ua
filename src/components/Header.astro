@@ -2,13 +2,15 @@
 import FutureLink from "./FutureLink.astro";
 import Icon from "./Icon.astro";
 import { NAV, PHONE, EMAIL, SOON } from "../data/site";
+import logoPng from "../assets/AKLogo.png?url";
+import logoWebp from "../assets/AKLogo.webp?url";
 ---
 <header class="site-header" data-rec="U-R004,U-R002">
   <div class="container site-header__in">
     <a class="logo" href="#top" aria-label="LKQ ELIT, на початок сторінки" data-rec="P-R003,SEO-R007">
       <picture>
-        <source srcset="/AKLogo.webp" type="image/webp" />
-        <img src="/AKLogo.png" width="250" height="32" alt="LKQ ELIT" decoding="async" />
+        <source srcset={logoWebp} type="image/webp" />
+        <img src={logoPng} width="250" height="32" alt="LKQ ELIT" decoding="async" />
       </picture>
     </a>
 
